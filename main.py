@@ -141,7 +141,7 @@ class Ui_MainWindow(object):
         for i in range(port["Count"]):
             a = port[i]
             self.TableList.setItem(i,0, QTableWidgetItem(a['NewPortMappingDescription']))
-            self.TableList.setItem(i,1, QTableWidgetItem(str(a['NewInternalPort'])))
+            self.TableList.setItem(i,1, QTableWidgetItem(str(a['NewExternalPort'])))
             self.TableList.setItem(i,2, QTableWidgetItem(a['NewProtocol']))
             self.TableList.setItem(i,3, QTableWidgetItem(a['NewInternalClient']))
         self.TableList.resizeColumnsToContents()
@@ -152,7 +152,7 @@ class Ui_MainWindow(object):
         self.op_drop.addItems(["TCP", "UDP"])
         for i in range(port["Count"]):
             a = port[i]
-            self.cpdrop.addItem(str(a['NewInternalPort']) + " " + a["NewProtocol"])
+            self.cpdrop.addItem(str(a['NewExternalPort']) + " " + a["NewProtocol"])
 
     def close_port_b(self):
         item = self.cpdrop.currentText()
