@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
             up = config.get("SETTINGS", "ip")
             d = upnpclient.Device(up)
         except:
-            Ui_MainWindow.error_message("No IP given please edit configfile")
+            Ui_MainWindow.error_message("No valid IP given please edit configfile")
             exit()
 
         port = get_ports(d)
