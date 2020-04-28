@@ -16,18 +16,26 @@ def get_ip():
     return IP
 
 def open_port(ip, port, protocol, name, d):
-    d.WANIPConn1.AddPortMapping(
-    NewRemoteHost='0.0.0.0',
-    NewExternalPort=port,
-    NewProtocol=protocol,
-    NewInternalPort=port,
-    NewInternalClient=ip,
-    NewEnabled='1',
-    NewPortMappingDescription=name,
-    NewLeaseDuration=10000)
+    try:
+        d.WANIPConn1.AddPortMapping(
+        NewRemoteHost='0.0.0.0',
+        NewExternalPort=port,
+        NewProtocol=protocol,
+        NewInternalPort=port,
+        NewInternalClient=ip,
+        NewEnabled='1',
+        NewPortMappingDescription=name,
+        NewLeaseDuration=10000)
+        return None
+    except Exception as e:
+        return e
 
 def close_port(port, protocol, d):
-    d.WANIPConn1.DeletePortMapping(
-    NewRemoteHost='0.0.0.0',
-    NewExternalPort=port,
-    NewProtocol=protocol)
+    try:
+        d.WANIPConn1.DeletePortMapping(
+        NewRemoteHost='0.0.0.0',
+        NewExternalPort=port,
+        NewProtocol=protocol)
+        return None
+    except Exception as e:
+        return e

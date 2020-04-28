@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.op_layout.addWidget(self.op_name)
         self.op_port = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
         self.op_port.setMinimum(0)
-        self.op_port.setMaximum(99999)
+        self.op_port.setMaximum(60000)
         self.op_port.setObjectName("op_port")
         self.op_layout.addWidget(self.op_port)
         self.op_drop = QtWidgets.QComboBox(self.horizontalLayoutWidget)
@@ -160,7 +160,9 @@ class Ui_MainWindow(object):
             Ui_MainWindow.error_message("No item Selected")
             return "error"
         ritem = item[:-4]
-        close_port(ritem, item[-3:], d)
+        cp = close_port(ritem, item[-3:], d)
+        if cp != None:
+            Ui_MainWindow.error_message(str(cp))
         ui.reload()
 
     def port_open(self):
@@ -173,7 +175,9 @@ class Ui_MainWindow(object):
         if ports == 0:
             Ui_MainWindow.error_message("No portnumber given")
             return "port"
-        open_port(ip, ports, protocol, name, d)
+        op = open_port(ip, ports, protocol, name, d)
+        if op != None:
+            Ui_MainWindow.error_message(str(op))
         self.op_name.clear()
         self.op_port.setValue(0)
         ui.reload()
